@@ -11,15 +11,16 @@ author, and this description to match your project!
 
 let backgroundShade= 0;
 let circleSize= 200;
-let circleX=250;
+let circleX=0;
 let circleY=250;
+let circleSpeed=2;
+let circleAcceleration=0.25;
 /**
 Description of preload
 */
 function preload() {
 
 }
-
 
 /**
 Description of setup
@@ -29,12 +30,13 @@ createCanvas(500,500);
 
 }
 
-
 /**
 Description of draw()
 */
 function draw() {
 background(backgroundShade);
+circleX += circleSpeed;
+circleSpeed += circleAcceleration;
 ellipse(circleX,circleY,circleSize);
 
 
