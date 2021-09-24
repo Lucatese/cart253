@@ -1,3 +1,4 @@
-# Template p5 project
+# Move it exercise
 
-This is the README file for the entire project. For more official projects you should write information here about the nature of the project, your name, any special explanations of how the project works, etc.
+
+This is an exercise where I had multiple shapes moving randomly and some would increase/decrease in sizes. The user can interact by moving the mouse to change the shade/color of the circle and change how big/small it becomes.
