@@ -66,13 +66,30 @@ for(let i = 0; i < numStatic; i++) {
 
 
 // Covid 19 movement
-covid19.x = covid19.x + covid19.vx;
-covid19.y = covid19.y + covid19.vy;
 
-if(covid19.x > width) {
-  covid19.x = 0;
-  covid19.y = random(0,height);
+if (mouseX < covid19.x) {
+covid19.vx = -covid19.speed;
 }
+else {
+  covid19.vx = covid19.speed;
+}
+
+if (mouseY < covid19.y) {
+covid19.vy = -covid19.speed;
+}
+else {
+  covid19.vy = covid19.speed;
+}
+
+covid19.x = covid19.x +covid19.vx;
+covid19.y = covid19.y +covid19.vy;
+// covid19.x = covid19.x + covid19.vx;
+// covid19.y = covid19.y + covid19.vy;
+//
+// if(covid19.x > width) {
+//   covid19.x = 0;
+//   covid19.y = random(0,height);
+// }
 // User movement
 user.x = mouseX;
 user.y = mouseY;
