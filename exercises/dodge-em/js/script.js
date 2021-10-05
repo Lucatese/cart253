@@ -10,12 +10,14 @@ This is the dodge-em Exercise
 let covidImage;
 
 /**
-Description of preload
+Loading the covid image inside the window
 */
 function preload() {
-  covidImage = loadImage("assets/images/covid19.png");
+  covidImage = loadImage("assets/images/covid19facemask.png");
 
 }
+
+
 
 let covid19 = {
   x: 0,
@@ -58,7 +60,8 @@ Description of draw()
 function draw() {
 background(119, 252, 3);
 
-image(covidImage,0,0);
+// Display image in top right
+image(covidImage,0,0,200,200);
 
 // Display static
 for(let i = 0; i < numStatic; i++) {
@@ -87,15 +90,26 @@ else {
 
 covid19.x = covid19.x +covid19.vx;
 covid19.y = covid19.y +covid19.vy;
+
 // User movement
 user.x = mouseX;
 user.y = mouseY;
+
+// User color change
+if(mouseIsPressed) {
+user.fill = (0);
+}
+else {
+user.fill = 255 ;
+}
 
 // Check for catching covid19
 let d = dist(user.x,user.y,covid19.x,covid19.y);
 if (d < covid19.size/2 + user.size/2) {
   noLoop();
 }
+
+
 
 // Display covid 19
 fill(covid19.fill.r,covid19.fill.g,covid19.fill.b);
