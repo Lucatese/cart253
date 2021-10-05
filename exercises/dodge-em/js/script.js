@@ -25,8 +25,8 @@ let covid19 = {
   vy: 0,
   speed: 5,
   fill: {
-    r: 255,
-    g: 0,
+    r: 0,
+    g: 255,
     b: 0
   }
 };
@@ -38,7 +38,7 @@ let user = {
   fill: 255
 };
 
-let numStatic = 2500;
+let numStatic = 3000;
 /**
 Description of setup
 */
@@ -56,7 +56,7 @@ function setup() {
 Description of draw()
 */
 function draw() {
-background(0);
+background(119, 252, 3);
 
 image(covidImage,0,0);
 
@@ -64,7 +64,7 @@ image(covidImage,0,0);
 for(let i = 0; i < numStatic; i++) {
   let x = random(0,width);
   let y = random(height,0);
-  stroke(255);
+  stroke(255,0,0);
   point(x,y);
 }
 
