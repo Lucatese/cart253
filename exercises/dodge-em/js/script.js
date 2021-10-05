@@ -2,16 +2,18 @@
 Dodge-em Exercise
 Luca Licatese
 
-This is the dodging covid 19 Exercise
+This is the dodge-em Exercise
 */
 
 "use strict";
 
+let covidImage;
 
 /**
 Description of preload
 */
 function preload() {
+  covidImage = loadImage("assets/images/covid19.png");
 
 }
 
@@ -56,6 +58,8 @@ Description of draw()
 function draw() {
 background(0);
 
+image(covidImage,0,0);
+
 // Display static
 for(let i = 0; i < numStatic; i++) {
   let x = random(0,width);
@@ -83,13 +87,6 @@ else {
 
 covid19.x = covid19.x +covid19.vx;
 covid19.y = covid19.y +covid19.vy;
-// covid19.x = covid19.x + covid19.vx;
-// covid19.y = covid19.y + covid19.vy;
-//
-// if(covid19.x > width) {
-//   covid19.x = 0;
-//   covid19.y = random(0,height);
-// }
 // User movement
 user.x = mouseX;
 user.y = mouseY;
