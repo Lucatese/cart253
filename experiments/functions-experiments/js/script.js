@@ -13,62 +13,39 @@ author, and this description to match your project!
 Description of preload
 */
 
-let circle = {
-x: 250,
-y: 250,
-size: 100,
-vx: 0,
-vy: 0
-}
 
-/**
-Description of setup
-*/
+let hello = {
+string: `Hello, world!`,
+x: 0,
+y: 0,
+vx: 5,
+vy: 1,
+size: 64
+
+};
+
 
 
 function setup() {
   createCanvas(500,500);
-reset();
 }
 
 function draw() {
-  background(0);
+background(0);
 
-move();
-checkOffscreen();
-display();
+hello.x = hello.x + hello.vx;
+hello.y = hello.y + hello.vy;
 
-}
+hello.size = hello.size + 1;
 
-function move() {
-circle.x = circle.x + circle.vx;
-circle.y = circle.y + circle.vy;
-}
+textAlign(CENTER,CENTER);
+textSize(hello.size);
+textStyle(BOLD);
 
+fill(200,50,200);
+stroke(50,200,50);
+strokeWeight(3);
 
-function checkOffscreen() {
+text(hello.string,hello.x,hello.y);
 
-if (circleIsOffScreen()) {
-  reset();
-  }
-}
-
-function circleIsOffScreen() {
-if (circle.x < 0 || circle.x > width || circle.y < 0 || circle.y > height) {
-  return true;
-  }
-  else{
-    return false;
-  }
-}
-
-function display() {
-  ellipse(circle.x,circle.y,circle.size);
-}
-
-function reset() {
-  circle.x = 250,
-  circle.y = 250;
-  circle.vx = random(-10,10);
-  circle.vy = random(-10,10);
 }
