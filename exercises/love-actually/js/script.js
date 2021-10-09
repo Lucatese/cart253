@@ -17,7 +17,7 @@ let circle1 = {
   size:150,
   vx:0,
   vy:0,
-  speed: 5,
+  speed: 7.5,
   tx: 0,
   ty: 100
 };
@@ -39,7 +39,7 @@ let circle3 = {
   vy: 0,
   speed:0.5,
   tx: 1000,
-  ty: 0
+  ty: 100
 }
 
 
@@ -64,8 +64,7 @@ function setUpCircles() {
     // Start circles moving in a from random direction
     circle1.vx = random(-circle1.speed,circle1.speed);
     circle1.vy = random(-circle1.speed,circle1.speed);
-    //circle2.vx = random(-circle2.speed,circle2.speed);
-    //circle2.vy = random(-circle2.speed,circle2.speed);
+
   }
 
 
@@ -141,8 +140,8 @@ function escape() {
 
 function move() {
   // Move the circles
-  circle1.x = map(noise(circle1.tx),0,1,0,width); //circle1.x + circle1.vx;
-  circle1.y = map(noise(circle1.ty),0,1,0,height); //circle1.y + circle1.vy;
+  circle1.x = map(noise(circle1.tx),0,1,0,width);
+  circle1.y = map(noise(circle1.ty),0,1,0,height);
   circle1.tx += 0.03;
   circle1.ty += 0.03;
 
@@ -157,8 +156,8 @@ function move() {
 }
 
 function checkOffscreen() {
-  // Check if the circles have gone offscreen
-  if (isOffScreen(circle1) || isOffScreen(circle2)) {
+  // Check if the user's circle has gone off-screen
+  if (isOffScreen(circle2)) {
     state = `death`;
   }
 }
@@ -181,7 +180,7 @@ function checkOverlap() {
 }
 
 function reachFreedom() {
-  // Check if the circle touches the smaller circle
+  // Check if the circle touches the smaller circle to escape/win
   let d = dist(circle2.x,circle2.y,circle3.x,circle3.y);
   if (d < circle2.size/2 + circle3.size/2) {
     state = `escape`;
