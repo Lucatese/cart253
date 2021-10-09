@@ -1,9 +1,8 @@
 /**
-Love, Actually exercise
+Life or Death
 Luca Licatese
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+This is the love, actually exercise. I decided to take a spin on it and so you have to avoid the circles coming for you which represent death for as long as you. There is a small circle that you have to touch and find to escape for your freedom.
 */
 
 "use strict";
@@ -15,10 +14,10 @@ Description of preload
 let circle1 = {
   x: undefined,
   y: 500,
-  size:100,
+  size:150,
   vx:0,
   vy:0,
-  speed: 3,
+  speed: 5,
   tx: 0,
   ty: 100
 };
@@ -32,12 +31,27 @@ let circle2 = {
   speed: 3
 };
 
+let circle3 = {
+  x:undefined,
+  y:1000,
+  size: 5,
+  vx: 0,
+  vy: 0,
+  speed:0.5,
+  tx: 1000,
+  ty: 0
+}
+
+
+
+
+
 let state = `title`; //can be title,simulation, love or sadness
 /**
 Description of setup
 */
 function setup() {
-  createCanvas(1000,1000);
+  createCanvas(windowWidth,windowHeight);
   setUpCircles();
 }
 
@@ -69,11 +83,14 @@ title();
 else if (state === `simulation`) {
   simulation();
 }
-else if (state === `love`) {
-  love();
+else if (state === `life`) {
+  life();
 }
-else if (state === `sadness`) {
-  sadness();
+else if (state === `death`) {
+  death();
+  }
+  else if (state === `escape`) {
+    escape();
   }
 }
 
@@ -82,7 +99,7 @@ function title() {
   textSize(64);
   fill(200,100,100);
   textAlign(CENTER,CENTER);
-  text(`LOVE?`,width/2,height/2);
+  text(`SURVIVE`,width/2,height/2);
   pop();
 }
 
@@ -92,26 +109,35 @@ function simulation() {
   checkOffscreen();
   checkOverlap();
   display();
+  reachFreedom();
 }
 
-function love() {
+function life() {
   push();
   textSize(64);
   fill(255,150,150);
   textAlign(CENTER,CENTER);
-  text(`LOVE!`,width/2,height/2);
+  text(`Death caught up to you`,width/2,height/2);
   pop();
 }
 
-function sadness() {
+function death() {
   push();
   textSize(64);
   fill(150,150,255);
   textAlign(CENTER,CENTER);
-  text(`:(`,width/2,height/2);
+  text(`You can't escape death`,width/2,height/2);
   pop();
 }
 
+function escape() {
+  push();
+  textSize(64);
+  fill(240, 252, 3);
+  textAlign(CENTER,CENTER);
+  text(`You get to live another day`,width/2,height/2);
+  pop();
+}
 
 function move() {
   // Move the circles
@@ -120,16 +146,20 @@ function move() {
   circle1.tx += 0.03;
   circle1.ty += 0.03;
 
-circle2.x = mouseX;
-circle2.y = mouseY;
-  //circle2.x = circle2.x + circle2.vx;
-  //circle2.y = circle2.y + circle2.vy;
+  circle2.x = mouseX;
+  circle2.y = mouseY;
+
+  circle3.x = map(noise(circle3.tx),0,1,0,width);
+  circle3.y = map(noise(circle3.ty),0,1,0,height);
+  circle3.tx += 0.03;
+  circle3.ty += 0.03;
+
 }
 
 function checkOffscreen() {
   // Check if the circles have gone offscreen
   if (isOffScreen(circle1) || isOffScreen(circle2)) {
-    state = `sadness`;
+    state = `death`;
   }
 }
 
@@ -146,7 +176,15 @@ function checkOverlap() {
   // Check if the circles overlap
   let d = dist(circle1.x,circle1.y,circle2.x,circle2.y);
   if (d < circle1.size/2 + circle2.size/2) {
-    state = `love`;
+    state = `life`;
+  }
+}
+
+function reachFreedom() {
+  // Check if the circle touches the smaller circle
+  let d = dist(circle2.x,circle2.y,circle3.x,circle3.y);
+  if (d < circle2.size/2 + circle3.size/2) {
+    state = `escape`;
   }
 }
 
@@ -154,6 +192,7 @@ function display() {
   // Display the circles
   ellipse(circle1.x,circle1.y,circle1.size);
   ellipse(circle2.x,circle2.y,circle2.size);
+  ellipse(circle3.x,circle3.y,circle3.size);
   }
 
 function mousePressed() {
