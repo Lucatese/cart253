@@ -8,44 +8,24 @@ author, and this description to match your project!
 
 "use strict";
 
-
-/**
-Description of preload
-*/
-let music;
-
-function preload() {
-music = loadSound(`assets/sounds/bark.wav`);
+let circle = {
+  x: 0,
+  y: 0,
+  size: 100
 }
 
 
-
-/**
-Description of setup
-*/
 function setup() {
   createCanvas(500,500);
-
 }
 
 
-/**
-Description of draw()
-*/
+
 function draw() {
-background(0);
-}
+  background(0);
 
-function mousePressed() {
-  tryMusic();
-}
+  circle.x = mouseX;
+  circle.y = mouseY;
 
-function keyPressed() {
-  tryMusic();
-}
-
-function tryMusic() {
-  if (!music.isPlaying()) {
-  music.loop();
-  }
+  ellipse(circle.x,circle.y,100);
 }
