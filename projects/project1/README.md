@@ -1,3 +1,4 @@
-# Template p5 project
+# Coulrophobia
+Luca Licatese
 
-This is the README file for the entire project. For more official projects you should write information here about the nature of the project, your name, any special explanations of how the project works, etc.
+This is a game in which the player is trying to avoid getting captured by the creepy clowns. The user can add music by pressing any key and can use a special ability to send one of the enemies away from them if they're about to get captured. The sound was sourced from [Freesound: collaborative database of creative-commons licensed sound for musicians and sound lovers] (https://freesound.org/people/Beetlemuse/sounds/588173/)

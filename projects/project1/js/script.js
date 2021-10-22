@@ -2,7 +2,7 @@
 Coulrophobia
 Luca Licatese
 
-See how long you can survive in this creepy clown house to reach the highest score. Press any key to play music.
+See how long you can survive in this creepy clown house to reach the highest score. Press any key to play music. You also have  a special ability to send one of the enemies away by double clicking if you think you're about to get captured.
 */
 
 "use strict";
@@ -43,7 +43,7 @@ let enemy2 = {
   size: 100,
   vx: 0,
   vy: 0,
-  speed: 7.5,
+  speed: 7,
   fill: {
     r: 255,
     g: 0,
@@ -64,20 +64,17 @@ let user = {
 
 let state = `title`; //can be title,simulation, or ending
 /**
-Description of setup
+Sets up canvas at window's width and height. Also made sure that there was no cursor for mouse.
 */
 function setup() {
     createCanvas(windowWidth,windowHeight);
-
-    enemy1.y = random(0,height);
-    enemy1.vx = enemy1.speed;
 
     noCursor();
 }
 
 
 /**
-Description of draw()
+Draws background and the title, simulation and ending when appropriate.()
 */
 function draw() {
 background(0);
@@ -96,30 +93,32 @@ else if (state === `ending`) {
   ending();
   }
 }
-
+// title screen + text
 function title() {
   push();
   textSize(40);
-  fill(200,100,100);
+  fill(255,0,0);
   textAlign(CENTER,CENTER);
   text(`See how long you can survive the horror clowns! Press any key for music`,width/2,height/2);
   pop();
 }
-
+// simulation is the gameplay and makes sure everything is displayed correctly
 function simulation() {
   move();
   checkOverlap();
   display();
-}
 
+}
+//ending screen + text.
 function ending() {
   push();
   textSize(64);
-  fill(255,150,150);
+  fill(255,0,0);
   textAlign(CENTER,CENTER);
   text(`Looks like you got caught, try again!`,width/2,height/2);
   pop();
 }
+
 
 function move() {
   // Enemy1 movement
@@ -192,10 +191,17 @@ function display() {
   ellipse(user.x,user.y,user.size);
   }
 
+//changes title screen to gameplay
 function mousePressed() {
   if (state === `title`) {
     state = `simulation`;
     }
+}
+
+// Special power up so if you're about to get captured you can double click to send one of the enemy's away randomly.
+function doubleClicked() {
+  enemy2.x = random(0,500);
+  enemy2.y = random(0.500);
 }
 
 // score will display top left and will stop once game is over
@@ -211,7 +217,7 @@ function displayScore() {
   }
 }
 
-// if a key is pressed music will play and it will loop
+// if a key is pressed music will play and it will loop, won't repeat over its' self
 function keyPressed() {
   tryMusic();
 }
