@@ -10,17 +10,16 @@ author, and this description to match your project!
 
 
 
-/**
-Loading the covid image inside the window
-*/
+
 function preload() {
 
 
 }
 
+let score = 0;
 
 
-let covid19 = {
+let enemy1 = {
   x: 0,
   y: 250,
   size: 100,
@@ -48,8 +47,8 @@ Description of setup
 function setup() {
     createCanvas(windowWidth,windowHeight);
 
-    covid19.y = random(0,height);
-    covid19.vx = covid19.speed;
+    enemy1.y = random(0,height);
+    enemy1.vx = enemy1.speed;
 
     noCursor();
 }
@@ -61,29 +60,36 @@ Description of draw()
 function draw() {
 background(0);
 
+score ++;
+
+push();
+fill(255);
+textAlign(LEFT,TOP);
+textSize(32);
+text(score, width / 8, height / 8);
+pop();
 
 
 
 
+// Enemy1 movement
 
-// Covid 19 movement
-
-if (mouseX < covid19.x) {
-covid19.vx = -covid19.speed;
+if (mouseX < enemy1.x) {
+enemy1.vx = -enemy1.speed;
 }
 else {
-  covid19.vx = covid19.speed;
+  enemy1.vx = enemy1.speed;
 }
 
-if (mouseY < covid19.y) {
-covid19.vy = -covid19.speed;
+if (mouseY < enemy1.y) {
+enemy1.vy = -enemy1.speed;
 }
 else {
-  covid19.vy = covid19.speed;
+  enemy1.vy = enemy1.speed;
 }
 
-covid19.x = covid19.x +covid19.vx;
-covid19.y = covid19.y +covid19.vy;
+enemy1.x = enemy1.x + enemy1.vx;
+enemy1.y = enemy1.y + enemy1.vy;
 
 // User movement
 user.x = mouseX;
@@ -98,16 +104,16 @@ user.fill = 255 ;
 }
 
 // Check for catching covid19
-let d = dist(user.x,user.y,covid19.x,covid19.y);
-if (d < covid19.size/2 + user.size/2) {
+let d = dist(user.x,user.y,enemy1.x,enemy1.y);
+if (d < enemy1.size/2 + user.size/2) {
   noLoop();
 }
 
 
 
-// Display covid 19
-fill(covid19.fill.r,covid19.fill.g,covid19.fill.b);
-ellipse(covid19.x,covid19.y,covid19.size);
+// Display Enemy1
+fill(enemy1.fill.r,enemy1.fill.g,enemy1.fill.b);
+ellipse(enemy1.x,enemy1.y,enemy1.size);
 
 // Display user
 fill(user.fill);
