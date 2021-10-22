@@ -9,12 +9,13 @@ author, and this description to match your project!
 "use strict";
 
 
-
+let music;
 
 function preload() {
-
-
+music = loadSound(`assets/sounds/horrorclown.wav`);
 }
+
+
 
 let score = 0;
 
@@ -27,11 +28,15 @@ let enemy1 = {
   vy: 0,
   speed: 5,
   fill: {
-    r: 0,
-    g: 255,
+    r: 255,
+    g: 0,
     b: 0
   }
 };
+
+let enemy2 = {
+
+}
 
 let user = {
   x: 250,
@@ -62,12 +67,10 @@ background(0);
 
 score ++;
 
-push();
-fill(255);
-textAlign(LEFT,TOP);
-textSize(32);
-text(score, width / 8, height / 8);
-pop();
+displayScore();
+
+
+
 
 
 
@@ -96,12 +99,12 @@ user.x = mouseX;
 user.y = mouseY;
 
 // User color change
-if(mouseIsPressed) {
-user.fill = (0);
-}
-else {
-user.fill = 255 ;
-}
+// if(mouseIsPressed) {
+// user.fill = (0);
+// }
+// else {
+// user.fill = 255 ;
+// }
 
 // Check for catching covid19
 let d = dist(user.x,user.y,enemy1.x,enemy1.y);
@@ -119,4 +122,26 @@ ellipse(enemy1.x,enemy1.y,enemy1.size);
 fill(user.fill);
 ellipse(user.x,user.y,user.size);
 
+}
+
+function displayScore() {
+  push();
+  fill(255);
+  textAlign(LEFT,TOP);
+  textSize(32);
+  text(score, width / 8, height / 8);
+  pop();
+}
+
+
+
+function keyPressed() {
+  tryMusic();
+
+}
+
+function tryMusic() {
+  if (!music.isPlaying()) {
+    music.loop();
+  }
 }
