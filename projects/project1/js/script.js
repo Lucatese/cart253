@@ -39,17 +39,17 @@ let enemy1 = {
 
 let enemy2 = {
   x: 0,
-  y: 250,
+  y: 500,
   size: 100,
   vx: 0,
   vy: 0,
-  speed: 5,
+  speed: 7.5,
   fill: {
     r: 255,
     g: 0,
     b: 0
-    }
-  };
+  }
+};
 
 let user = {
   x: 250,
@@ -99,10 +99,10 @@ else if (state === `ending`) {
 
 function title() {
   push();
-  textSize(64);
+  textSize(40);
   fill(200,100,100);
   textAlign(CENTER,CENTER);
-  text(`See how long you can survive the horror clowns`,width/2,height/2);
+  text(`See how long you can survive the horror clowns! Press any key for music`,width/2,height/2);
   pop();
 }
 
@@ -117,12 +117,11 @@ function ending() {
   textSize(64);
   fill(255,150,150);
   textAlign(CENTER,CENTER);
-  text(`Looks like you got caught, try again`,width/2,height/2);
+  text(`Looks like you got caught, try again!`,width/2,height/2);
   pop();
 }
 
 function move() {
-
   // Enemy1 movement
   if (mouseX < enemy1.x) {
   enemy1.vx = -enemy1.speed;
@@ -130,7 +129,6 @@ function move() {
   else {
     enemy1.vx = enemy1.speed;
   }
-
   if (mouseY < enemy1.y) {
   enemy1.vy = -enemy1.speed;
   }
@@ -139,6 +137,22 @@ function move() {
   }
   enemy1.x = enemy1.x + enemy1.vx;
   enemy1.y = enemy1.y + enemy1.vy;
+
+  // Enemy2 movement
+  if (mouseX < enemy1.x) {
+  enemy2.vx = -enemy2.speed;
+  }
+  else {
+    enemy2.vx = enemy2.speed;
+  }
+  if (mouseY < enemy2.y) {
+  enemy2.vy = -enemy2.speed;
+  }
+  else {
+    enemy2.vy = enemy2.speed;
+  }
+  enemy2.x = enemy2.x + enemy2.vx;
+  enemy2.y = enemy2.y + enemy2.vy;
 
   // User movement
   user.x = mouseX;
@@ -149,6 +163,10 @@ function checkOverlap() {
   // Check if the circles overlap
   let d = dist(user.x,user.y,enemy1.x,enemy1.y);
   if (d < enemy1.size/2 + user.size/2) {
+    state = `ending`;
+  }
+  let d1 = dist(user.x,user.y,enemy2.x,enemy2.y);
+  if (d1 < enemy2.size/2 + user.size/2) {
     state = `ending`;
   }
 }
@@ -164,6 +182,11 @@ function display() {
   fill(enemy1.fill.r,enemy1.fill.g,enemy1.fill.b);
   ellipse(enemy1.x,enemy1.y,enemy1.size);
 
+  // Display Enemy2
+  fill(enemy2.fill.r,enemy2.fill.g,enemy2.fill.b);
+  ellipse(enemy2.x,enemy2.y,enemy2.size);
+
+
   // Display user
   fill(user.fill.r,user.fill.g,user.fill.b);
   ellipse(user.x,user.y,user.size);
@@ -175,6 +198,7 @@ function mousePressed() {
     }
 }
 
+// score will display top left and will stop once game is over
 function displayScore() {
   push();
   fill(255);
@@ -187,6 +211,7 @@ function displayScore() {
   }
 }
 
+// if a key is pressed music will play and it will loop
 function keyPressed() {
   tryMusic();
 }
