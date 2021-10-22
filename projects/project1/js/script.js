@@ -7,11 +7,15 @@ See how long you can survive in this creepy clown house to reach the highest sco
 
 "use strict";
 
+let clownImage;
 
 let music;
 
 function preload() {
 music = loadSound(`assets/sounds/horrorclown.wav`);
+
+clownImage = loadImage(`assets/images/clown.png`);
+
 }
 
 
@@ -33,15 +37,29 @@ let enemy1 = {
   }
 };
 
-// let enemy2 = {
-//
-// }
+let enemy2 = {
+  x: 0,
+  y: 250,
+  size: 100,
+  vx: 0,
+  vy: 0,
+  speed: 5,
+  fill: {
+    r: 255,
+    g: 0,
+    b: 0
+    }
+  };
 
 let user = {
   x: 250,
   y: 250,
   size: 100,
-  fill: 255
+  fill: {
+    r: 0,
+    g: 0,
+    b: 255
+  }
 };
 
 let state = `title`; //can be title,simulation, or ending
@@ -65,7 +83,6 @@ function draw() {
 background(0);
 
 score ++;
-
 displayScore();
 
 if (state === `title`) {
@@ -105,10 +122,8 @@ function ending() {
 }
 
 function move() {
-  // Move the circles
 
   // Enemy1 movement
-
   if (mouseX < enemy1.x) {
   enemy1.vx = -enemy1.speed;
   }
@@ -122,7 +137,6 @@ function move() {
   else {
     enemy1.vy = enemy1.speed;
   }
-
   enemy1.x = enemy1.x + enemy1.vx;
   enemy1.y = enemy1.y + enemy1.vy;
 
@@ -140,14 +154,18 @@ function checkOverlap() {
 }
 
 function display() {
-  // Display the circles
+
+  // Display clowns  around canvas
+  image(clownImage,1000,10,150,150);
+  image(clownImage,0,0,150,150);
+  image(clownImage,500,500,150,150);
 
   // Display Enemy1
   fill(enemy1.fill.r,enemy1.fill.g,enemy1.fill.b);
   ellipse(enemy1.x,enemy1.y,enemy1.size);
 
   // Display user
-  fill(user.fill);
+  fill(user.fill.r,user.fill.g,user.fill.b);
   ellipse(user.x,user.y,user.size);
   }
 
@@ -155,7 +173,6 @@ function mousePressed() {
   if (state === `title`) {
     state = `simulation`;
     }
-
 }
 
 function displayScore() {
@@ -169,8 +186,6 @@ function displayScore() {
     noLoop();
   }
 }
-
-
 
 function keyPressed() {
   tryMusic();
