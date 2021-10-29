@@ -9,7 +9,7 @@ class Ball {
     this.ax = 0;
     this.ay = 0;
     this.maxSpeed = 10;
-    this.size = 200;
+    this.size = 100;
     this.ballSFX = ballSFX;
     this.active = true;
   }
@@ -78,3 +78,4 @@ class Ball {
     ellipse( this.x, this.y, this.size);
     pop();
   }
+}

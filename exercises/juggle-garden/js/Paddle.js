@@ -13,6 +13,7 @@ class Paddle {
     this.x = mouseX;
   }
 
+  // Display paddle
   display() {
   push();
   fill(255);

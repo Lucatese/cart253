@@ -38,17 +38,31 @@ function preload() {
 let state = `title`; // Can be either title, simulation, end1, end2
 
 /**
-Description of setup
+Creating canvas, adding paddle in the simulation, displaying chainsaws and balls in the simulation
 */
 function setup() {
 createCanvas(windowWidth,windowHeight);
 
 paddle = new Paddle(300,20)
+
+for (let i = 0; i < numChainsaws; i++) {
+  let x = random(0, width);
+  let y = random(-200, -100);
+  let chainsaw = new Chainsaw(x,y,chainsawImage,chainsawSFX);
+  chainsaws.push(chainsaw);
+}
+
+for (let i = 0; i < numBalls; i++) {
+  let x = random(0, width);
+  let y = random(-200, -100);
+  let ball = new Ball(x,y,ballSFX);
+  balls.push(ball);
+  }
 }
 
 
 /**
-Description of draw()
+Adding black background and identifying the states
 */
 function draw() {
 background(0);
@@ -63,8 +77,30 @@ background(0);
    end1();
  } else if (state === `end2`) {
    end2();
- }
+  }
 }
+
+  // Title state
+  function title() {
+    push();
+    fill(255);
+    textSize(40);
+    textAlign(CENTER,CENTER);
+    text(`I hope you're a good juggler`,windowWidth/2,windowHeight/5);
+    pop();
+    textFont('Oswald');
+    fill(255);
+    textSize(20);
+    textAlign(CENTER,CENTER);
+    text(`Control the paddle with the mouse to keep juggling the items in the air`, windowWidth / 2, windowHeight / 3.5)
+    text(`Press 'C' to add chainsaws     |     Press 'B' to add balls`, windowWidth / 2, windowHeight / 1.7)
+    push();
+    fill(255);
+    textSize(45);
+    textAlign(CENTER, CENTER);
+    text(`Click to start`, windowWidth / 2, windowHeight / 1.1);
+    pop();
+  }
 
 
 
@@ -81,6 +117,7 @@ function end1() {
 fill(255);
 textSize(32);
 textAlign(CENTER,CENTER);
+textFont('Oswald');
 text(`Well that's gonna leave a scratch!`,windowWidth/2,windowHeight/2);
 }
 
@@ -89,9 +126,65 @@ function end2() {
 fill(255);
 textSize(32);
 textAlign(CENTER,CENTER);
+textFont('Oswald');
 text(`Well at least it wasn't a chainsaw, Try Again!`,windowWidth/2,windowHeight/2);
 }
 
+// Creating chainsaws and adding the methods which control them
+function createChainsaws() {
+  for (let i = 0; i < chainsaws.length; i++) {
+    let chainsaw = chainsaws[i];
+    if (chainsaw.active) {
+      chainsaw.gravity(gravityForce);
+      chainsaw.move();
+      chainsaw.bounce(paddle);
+      chainsaw.display();
+      chainsaw.check();
+      chainsaw.sound();
+    }
+  }
+}
+
+// Click with the mouse during title state to begin simulation
+function mousePressed() {
+  if (state === `title`) {
+    state = `simulation`;
+    }
+  }
 
 
+
+
+// Creating chainsaws and adding the methods which control them
+function createBalls() {
+  for (let i = 0; i < balls.length; i++) {
+    let ball = balls[i];
+    if (ball.active) {
+      ball.gravity(gravityForce);
+      ball.move();
+      ball.bounce(paddle);
+      ball.display();
+      ball.check();
+    }
+  }
+}
+
+// Pressing 'C' key will add a new chainsaw in the mouse position
+  function keyPressed() {
+    if (keyCode === 83) {
+      let x = mouseX;
+      let y = mouseY;
+      let chainsaw = new Chainsaw(x,y,chainsawImage,chainsawSFX);
+      chainsaws.push(chainsaw);
+    }
+
+// Pressing 'B' key will add a new ball in the mouse position
+    function keyPressed() {
+      if (keyCode === 66) {
+        let x = mouseX;
+        let y = mouseY;
+        let ball = new Ball(x,y,ballSFX);
+        balls.push(ball);
+      }
+    }
 }

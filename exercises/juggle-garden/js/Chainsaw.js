@@ -9,7 +9,7 @@ class Chainsaw {
     this.ax = 0;
     this.ay = 0;
     this.maxSpeed = 10;
-    this.size = 200;
+    this.size = 125;
     this.chainsawSFX = chainsawSFX;
     this.active = true;
     this.image = image;
@@ -77,4 +77,5 @@ class Chainsaw {
     imageMode(CENTER);
     image(this.image, this.x, this.y, this.size, this.size);
     pop();
+  }
 }
