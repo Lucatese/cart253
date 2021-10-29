@@ -15,7 +15,7 @@ class Flower {
       b: 50
     };
     this.petalColor = petalColor;
-    
+
     this.centreColor = {
       r: 50,
       g: 0,
@@ -35,6 +35,14 @@ display() {
   stroke(this.petalColor.r, this.petalColor.g, this.petalColor.b);
   ellipse(this.x, this.y, this.size);
   pop();
+  }
+
+  mousePressed() {
+    let d = dist(this.x,this.y,mouseX,mouseY);
+    if (d < this.size/2 + this.petalThickness) {
+      this.stemLength = this.stemLength + 5;
+      this.y = this.y - 5;
+    }
   }
 
 }
