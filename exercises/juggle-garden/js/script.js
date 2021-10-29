@@ -10,6 +10,11 @@ Luca Licatese
 // Defining force of gravity
 let gravityForce = 0.0025;
 
+// Creating arrays and defining items from the classes
+let chainsaws = [];
+let numChainsaws = 1;
+let balls = [];
+let numBalls = 1;
 
 let paddle;
 
