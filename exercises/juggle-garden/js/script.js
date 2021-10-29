@@ -47,14 +47,14 @@ paddle = new Paddle(300,20)
 
 for (let i = 0; i < numChainsaws; i++) {
   let x = random(0, width);
-  let y = random(-200, -100);
+  let y = random(-300, -100);
   let chainsaw = new Chainsaw(x,y,chainsawImage,chainsawSFX);
   chainsaws.push(chainsaw);
 }
 
 for (let i = 0; i < numBalls; i++) {
   let x = random(0, width);
-  let y = random(-200, -100);
+  let y = random(-300, -100);
   let ball = new Ball(x,y,ballSFX);
   balls.push(ball);
   }
@@ -145,17 +145,7 @@ function createChainsaws() {
   }
 }
 
-// Click with the mouse during title state to begin simulation
-function mousePressed() {
-  if (state === `title`) {
-    state = `simulation`;
-    }
-  }
-
-
-
-
-// Creating chainsaws and adding the methods which control them
+// Creating balls and adding the methods which control them
 function createBalls() {
   for (let i = 0; i < balls.length; i++) {
     let ball = balls[i];
@@ -169,9 +159,16 @@ function createBalls() {
   }
 }
 
+// Click with the mouse during title state to begin simulation
+function mousePressed() {
+  if (state === `title`) {
+    state = `simulation`;
+    }
+  }
+
 // Pressing 'C' key will add a new chainsaw in the mouse position
   function keyPressed() {
-    if (keyCode === 83) {
+    if (keyCode === 67) {
       let x = mouseX;
       let y = mouseY;
       let chainsaw = new Chainsaw(x,y,chainsawImage,chainsawSFX);
@@ -179,7 +176,6 @@ function createBalls() {
     }
 
 // Pressing 'B' key will add a new ball in the mouse position
-    function keyPressed() {
       if (keyCode === 66) {
         let x = mouseX;
         let y = mouseY;
@@ -187,4 +183,3 @@ function createBalls() {
         balls.push(ball);
       }
     }
-}

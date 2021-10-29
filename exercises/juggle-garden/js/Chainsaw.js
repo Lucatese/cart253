@@ -9,7 +9,7 @@ class Chainsaw {
     this.ax = 0;
     this.ay = 0;
     this.maxSpeed = 10;
-    this.size = 125;
+    this.size = 150;
     this.chainsawSFX = chainsawSFX;
     this.active = true;
     this.image = image;
