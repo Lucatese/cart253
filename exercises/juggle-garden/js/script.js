@@ -1,26 +1,21 @@
 /**
-Title of Project
-Author Name
+Exercise 05: Juggle Garden
+Luca Licatese
 
-This is a template. You must fill in the title,
-author, and this description to match your project!
+ This simulation should include another form of user-control, a new class and objects and at least 2 endings.
 */
 
 "use strict";
 
 
-/**
-Description of preload
-*/
-function preload() {
-
-}
+let gravityForce = 0.0025;
 
 
 /**
 Description of setup
 */
 function setup() {
+createCanvas(windowWidth,windowHeight);
 
 }
 
@@ -29,5 +24,6 @@ function setup() {
 Description of draw()
 */
 function draw() {
+background(0);
 
 }
