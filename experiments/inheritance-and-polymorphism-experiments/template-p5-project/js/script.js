@@ -12,6 +12,7 @@ author, and this description to match your project!
 let vehicles = [];
 let numCars = 10;
 let numMotorcycles = 10;
+let numSportsCars = 3;
 
 
 
@@ -32,6 +33,15 @@ function setup() {
     let y = random(0, height);
     let motorcycle = new Motorcycle(x, y);
     vehicles.push(motorcycle);
+  }
+
+
+// Create the correct number of motorcycles and put them in our array
+for (let i = 0; i < numSportsCars; i++) {
+  let x = random(0, width);
+  let y = random(0, height);
+  let sportscar= new SportsCar(x, y);
+  vehicles.push(sportscar);
   }
 }
 
