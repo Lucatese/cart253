@@ -49,7 +49,7 @@ function setup() {
   createCanvas(windowWidth,windowHeight);
 
   // Displaying user image
- let x = width / 5;
+ let x = width / 6;
  let y = height / 2;
  user = new User(x, y, userImage);
 
@@ -117,12 +117,13 @@ function simulation() {
     dodgeableItem.move();
     dodgeableItem.wrap();
     dodgeableItem.display();
+    dodgeableItem.wiggle();
     dodgeableItem.numDodges();
     dodgeableItem.checkScreen();
 
     // User control
     user.handleInput();
-    user.checkCollision(DodgeableItem);
+    user.checkCollision(dodgeableItem);
   }
 }
 

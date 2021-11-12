@@ -17,6 +17,10 @@ class DodgeableItem {
     this.y += this.vy;
   }
 
+  // dodgeableItems will wiggle lightly to make movement flow better
+    wiggle() {
+      this.y = this.y + random(-5, 5);
+    }
 
 
   /* When dodgeableItems reach the other side of screen they will reappear at the starting
