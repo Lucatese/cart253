@@ -3,7 +3,7 @@ class User {
     this.x = x;
     this.y = y;
     this.width = 200;
-    this.height = 250;
+    this.height = 200;
     this.dodged = true;
     this.image = userImage;
   }
