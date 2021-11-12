@@ -1,3 +1,11 @@
-# Template p5 project
+# Project 2: Prototype
 
-This is the README file for the entire project. For more official projects you should write information here about the nature of the project, your name, any special explanations of how the project works, etc.
+In this game, the user is using their mouse to move on the Y-axis to dodge wrenches, bricks and dodgeballs. If the user can keep dodging them for a period of time they'll win. I got the images for all of my assets
+
+https://clubpenguin.fandom.com/wiki/Dodgeball_Pin (dodgeball)
+
+https://wbo.com/?attachment_id=3723 (empty gym)
+
+https://emojidex.com/emoji/wrench (wrench)
+
+https://freepikpsd.com/download-brick-png-image/15848/ (brick)

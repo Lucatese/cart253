@@ -32,11 +32,11 @@ let dodgeballImage = undefined;
 Loading all images that will be used in code
 */
 function preload() {
-    brickImage = loadImage("assets/images/brick.png");
+    brickImage = loadImage("assets/images/flyingbrick.png");
     dodgeballImage = loadImage("assets/images/dodgeball.png");
     wrenchImage = loadImage("assets/images/wrench.png");
 
-    userImage = loadImage("assets/images/user.png");
+    userImage = loadImage("assets/images/player.png");
 
     bground = loadImage("assets/images/gym.png");
 }
