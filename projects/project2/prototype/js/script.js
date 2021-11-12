@@ -38,7 +38,7 @@ function preload() {
 
     userImage = loadImage("assets/images/user.png");
 
-    bg = loadImage("assets/images/gym.png");
+    bground = loadImage("assets/images/gym.png");
 }
 
 
@@ -79,7 +79,7 @@ function setup() {
 
 
 // Declaring the direction and speed that the dodgeableItems will move in
- for (let i = 0; i < dodgeableItem.length; i++) {
+ for (let i = 0; i < dodgeableItems.length; i++) {
    let dodgeableItem = dodgeableItems[i];
    dodgeableItem.vx = dodgeableItem.speed;
  }
@@ -91,4 +91,57 @@ Displays background image and creates the simulation, failure and success states
 function draw() {
   background(bground);
 
+  if (state === `simulation`) {
+    simulation();
+  } else if (state === `failure`) {
+    failure();
+  } else if (state === `success`) {
+    success();
+  }
+}
+
+// Simulation state
+function simulation() {
+
+  // Display user image
+  user.display();
+
+  // If user gets hit by a dodgeableItem, `failure` state is triggered
+  if (!user.dodged) {
+    state = `failure`;
+  }
+
+  // For loop to create all of the dodgeableItems along with all statements from DodgeableItem class
+  for (let i = 0; i < dodgeableItems.length; i++) {
+    let dodgeableItem = dodgeableItems[i];
+    dodgeableItem.move();
+    dodgeableItem.wrap();
+    dodgeableItem.display();
+    dodgeableItem.numDodges();
+    dodgeableItem.checkScreen();
+
+    // User control
+    user.handleInput();
+    user.checkCollision(DodgeableItem);
+  }
+}
+
+// State that appears when user gets hit by a dodgeableItem
+function failure() {
+  displayText(`YOU FAILED! NOW GET BACK AND TRY AGAIN!`)
+}
+
+// State that appears when user has successfully dodged enough dodgeableItems
+function success() {
+  displayText(`GREAT JOB! NOW GET OUT THERE AND WIN!`)
+}
+
+// Characteristics for text which will be used for each text
+function displayText(string) {
+  push();
+  textAlign(CENTER, CENTER);
+  textSize(24);
+  fill(255);
+  text(string, width / 2, height / 2);
+  pop();
 }
