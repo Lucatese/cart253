@@ -2,7 +2,7 @@ class User {
   constructor(x,y,userImage) {
     this.x = x;
     this.y = y;
-    this.width = 400;
+    this.width = 200;
     this.height = 250;
     this.dodged = true;
     this.image = userImage;

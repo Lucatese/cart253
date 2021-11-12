@@ -11,7 +11,7 @@ let state = `simulation`; // Could be Simulation, Failure or Success
 
 // Array to display all 3 dodgeable items
 let dodgeableItems = [];
-let numDodgeballs = 5;
+let numDodgeballs = 10;
 let numWrenches = 5;
 let numBricks = 5;
 
@@ -49,7 +49,7 @@ function setup() {
   createCanvas(windowWidth,windowHeight);
 
   // Displaying user image
- let x = width / 6;
+ let x = width / 5;
  let y = height / 2;
  user = new User(x, y, userImage);
 
@@ -82,7 +82,7 @@ function setup() {
  for (let i = 0; i < dodgeableItems.length; i++) {
    let dodgeableItem = dodgeableItems[i];
    dodgeableItem.vx = dodgeableItem.speed;
- }
+  }
 }
 
 /**
@@ -141,8 +141,8 @@ function success() {
 function displayText(string) {
   push();
   textAlign(CENTER, CENTER);
-  textSize(24);
-  fill(255);
+  textSize(40);
+  fill(0);
   text(string, width / 2, height / 2);
   pop();
 }

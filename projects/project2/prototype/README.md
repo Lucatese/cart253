@@ -9,3 +9,5 @@ https://wbo.com/?attachment_id=3723 (empty gym)
 https://emojidex.com/emoji/wrench (wrench)
 
 https://freepikpsd.com/download-brick-png-image/15848/ (brick)
+
+http://clipart-library.com/clipart/n1109458.htm (user)

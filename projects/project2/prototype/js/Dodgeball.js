@@ -1,9 +1,9 @@
 class Dodgeball extends DodgeableItem {
   constructor(x, y, image) {
     super(x, y, image);
-    this.speed = -15;
-    this.width = 125;
-    this.height = 125;
+    this.speed = -3;
+    this.width = 75;
+    this.height = 75;
   }
 
   // Displaying the Dodgeball image
