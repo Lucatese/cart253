@@ -36,7 +36,7 @@ function preload() {
     dodgeballImage = loadImage("assets/images/dodgeball.png");
     wrenchImage = loadImage("assets/images/wrench.png");
 
-    userImage = loadImage("assets/images/player.png");
+    userImage = loadImage("assets/images/dodgeb.png");
 
     bground = loadImage("assets/images/gym.png");
 }
