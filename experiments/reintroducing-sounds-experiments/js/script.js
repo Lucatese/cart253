@@ -8,13 +8,8 @@ author, and this description to match your project!
 
 "use strict";
 
-let barkSFX;
-/**
-Description of preload
-*/
-function preload() {
-barkSFX = loadSound(`assets/sounds/bark.wav`);
-}
+let oscillator;
+let t = 0;
 
 
 /**
@@ -23,6 +18,9 @@ Description of setup
 function setup() {
 createCanvas(600,600);
 userStartAudio();
+
+oscillator = new p5.Oscillator(440,`sine`);
+oscillator.amp(0.2);
 }
 
 
@@ -32,10 +30,17 @@ Description of draw()
 function draw() {
 background(0);
 
-let newRate = map(mouseX,0,width,-3,3);
-  barkSFX.rate(newRate);
+let noiseValue = noise(t);
+let newFreq = map(noiseValue,-1,1,0,2000);
+oscillator.freq(newFreq);
+
+t = t + 0.1;
 }
 
 function mousePressed() {
-  barkSFX.loop();
+  oscillator.start();
+}
+
+function mouseReleased() {
+  oscillator.stop();
 }
