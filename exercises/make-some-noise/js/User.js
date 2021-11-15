@@ -1,37 +1,35 @@
 class User {
-  constructor(x,y,userImage) {
+  constructor(x,y,) {
     this.x = x;
     this.y = y;
-    this.width = 200;
-    this.height = 200;
+    this.size = 100;
+    this.vx = 0;
+    this.vy = 0;
+    this.ay = 0.1;
+    this.speed = 10;
     this.dodged = true;
-    this.image = userImage;
+
   }
 
-  // If the user gets hit by a dodgeableItem, dodged becomes false
-    checkCollision(dodgeableItem) {
-      if (this.x > dodgeableItem.x - dodgeableItem.height / 2 &&
-        this.x > dodgeableItem.x - dodgeableItem.width / 2 &&
-        this.x < dodgeableItem.x + dodgeableItem.height / 2 &&
-        this.x < dodgeableItem.x + dodgeableItem.width / 2 &&
-        this.y > dodgeableItem.y - dodgeableItem.height / 2 &&
-        this.y > dodgeableItem.y - dodgeableItem.width / 2 &&
-        this.y < dodgeableItem.y + dodgeableItem.height / 2 &&
-        this.y < dodgeableItem.y + dodgeableItem.width / 2) {
-        this.dodged = false;
-      }
+  checkCollision(dodgeableItem) {
+    if (this.x > dodgeableItem.x - dodgeableItem.size/2 &&
+    this.x < dodgeableItem.x + dodgeableItem.size/2 &&
+    this.y > dodgeableItem.y - dodgeableItem.size/2 &&
+    this.y < dodgeableItem.y + dodgeableItem.size/2) {
+      this.dodged = false;
     }
+  }
 
-    // Can control the user using mouse movement only for the Y-Axis
-    handleInput() {
-      this.y = mouseY;
-    }
-
-  // Displaying the user image
-   display() {
-     push();
-     imageMode(CENTER);
-     image(this.image, this.x, this.y, this.width, this.height);
-     pop();
-   }
+ handleInput() {
+let micLevel = mic.getLevel();
+this.y = map(micLevel,0,3,0,height);
 }
+
+  display() {
+      push();
+      fill(255);
+      noStroke();
+      ellipse(this.x,this.y,this.size);
+      pop();
+    }
+  }

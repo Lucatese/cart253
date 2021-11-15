@@ -1,18 +1,19 @@
 class Wrench extends DodgeableItem {
-  constructor(x, y, image) {
-    super(x, y, image);
-    this.speed = -10;
-    this.width = 100;
-    this.height = 100;
+  constructor(x, y,) {
+    super(x, y,);
+    this.speed = 10;
+    this.size = 40
   }
 
-  // Displaying the Wrench image
+
   display() {
     super.display();
 
     push();
-    imageMode(CENTER);
-    image(this.image, this.x, this.y, this.width, this.height);
-    pop();
+ ellipseMode(CENTER);
+ stroke(100,100,255);
+ fill(255,0,0)
+ ellipse(this.x,this.y,this.size);
+ pop();
   }
 }
