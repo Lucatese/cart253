@@ -1,4 +1,4 @@
-class Wrench extends DodgeableItem {
+class BrickL1 extends DodgeableItemL1 {
   constructor(x, y, image) {
     super(x, y, image);
     this.speed = -10;
@@ -6,7 +6,7 @@ class Wrench extends DodgeableItem {
     this.height = 100;
   }
 
-  // Displaying the Wrench image
+  // Displaying the Brick image
   display() {
     super.display();
 

@@ -1,4 +1,4 @@
-class DodgeableItem {
+class DodgeableItemL1 {
   constructor(x, y, image) {
     this.x = x;
     this.y = y;
@@ -45,7 +45,7 @@ class DodgeableItem {
   // If the number of dodgeableItems dodged exceeds 50, the `success` state is triggered
   numDodges() {
     if (this.dodges > 50) {
-      state = `success`;
+      state = `level2`;
     }
   }
 

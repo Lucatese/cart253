@@ -1,4 +1,4 @@
-class User {
+class UserL1 {
   constructor(x,y,userImage) {
     this.x = x;
     this.y = y;

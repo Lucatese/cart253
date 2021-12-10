@@ -1,4 +1,4 @@
-class Dodgeball extends DodgeableItem {
+class DodgeballL1 extends DodgeableItemL1 {
   constructor(x, y, image) {
     super(x, y, image);
     this.speed = -3;
