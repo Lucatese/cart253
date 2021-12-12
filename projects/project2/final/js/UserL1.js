@@ -1,7 +1,7 @@
 class UserL1 {
-  constructor(x,y,userImage) {
-    this.x = x;
-    this.y = y;
+  constructor(userImage) {
+    this.x = width/5;
+    this.y = height/2;
     this.width = 200;
     this.height = 200;
     this.dodged = true;
@@ -19,6 +19,13 @@ class UserL1 {
         this.y < dodgeableItem.y + dodgeableItem.height / 2 &&
         this.y < dodgeableItem.y + dodgeableItem.width / 2) {
         this.dodged = false;
+      }
+    }
+
+    // If user is hit by an item, 'level1Fail' state is triggered
+    notDodged() {
+      if (!this.dodged) {
+        state = `level1Fail`;
       }
     }
 

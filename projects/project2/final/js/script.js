@@ -7,7 +7,7 @@ Prototype for Project 2; Final CART 253 Project
 
 "use strict";
 
-let state = `simulation`; // Could be Simulation, Failure or Success
+let state = `level1`; // Could be level1, level1Fail,level2,level2fail,level3,level3fail,final
 
 // Array to display all 3 dodgeable items: Level 1
 let dodgeableItems = [];
@@ -49,9 +49,7 @@ setupLevel1();
 
 function setupLevel1() {
   // Displaying user image
- let x = width / 5;
- let y = height / 2;
- user = new UserL1(x, y, userImage);
+ user = new UserL1(userImage);
  // Displaying bricks used for loop
   for (let i = 0; i < numBricks; i++) {
     let x = random(width / 2, width);
@@ -86,59 +84,54 @@ Displays background image and creates the simulation, failure and success states
 function draw() {
   background(bground);
 
-  if (state === `simulation`) {
-    simulation();
-  } else if (state === `failure`) {
-    failure();
-  } else if (state === `success`) {
-    success();
+  if (state === `level1`) {
+    level1();
+  } else if (state === `level1Fail`) {
+    level1fail();
+  } else if (state === `level2`) {
+    level2();
   }
 }
 
-// Simulation state
-function simulation() {
 
-  // Display user image
+/* Level 1 state : LEVEL 1 */
+function level1() {
+
+  // Display user-controlled image
   user.display();
-
-  // If user gets hit by a dodgeableItem, `failure` state is triggered
-  if (!user.dodged) {
-    state = `failure`;
-  }
-
-  // For loop to create all of the dodgeableItems along with all statements from DodgeableItem class
+  // If user gets hit by a dodgeableItem, `level1Fail` state is triggered
+  user.notDodged();
+  // For loop to create all of the dodgeableItems,with all of the statements from dodgeableItem class
   for (let i = 0; i < dodgeableItems.length; i++) {
     let dodgeableItem = dodgeableItems[i];
+    // Adding movement to the dodgeableItems
     dodgeableItem.move();
+    /* When a dodgeableItem reaches the other side of screen they will reappear at the starting
+    point in a random position */
     dodgeableItem.wrap();
+    // Display dodgeableItems
     dodgeableItem.display();
+    // dodgeableItems will shake up and down slightly in order to make the overall movement more realistic
     dodgeableItem.wiggle();
+    // If the number of dodgeableItems dodged exceeds 50, `level2` state is triggered
     dodgeableItem.numDodges();
+    // When a dodgeableItem passes the user, +1 is added to the dodges
     dodgeableItem.checkScreen();
-
-    // User control
-    user.handleInput();
+    // Check when dodgeableItem and user overlap
     user.checkCollision(dodgeableItem);
   }
+  // User control for UserL1 image
+  user.handleInput();
 }
-
-// State that appears when user gets hit by a dodgeableItem
-function failure() {
-  displayText(`YOU FAILED! NOW GET BACK AND TRY AGAIN!`)
-}
-
-// State that appears when user has successfully dodged enough dodgeableItems
-function success() {
-  displayText(`GREAT JOB! NOW GET OUT THERE AND WIN!`)
-}
-
-// Characteristics for text which will be used for each text
-function displayText(string) {
+// State that appears when user gets hit by a dodgeableItem: level1Fail
+function level1Fail() {
   push();
+  displayText(`YOU FAILED! NOW GET BACK AND TRY AGAIN!`)
   textAlign(CENTER, CENTER);
   textSize(40);
   fill(0);
   text(string, width / 2, height / 2);
   pop();
 }
+
 }
