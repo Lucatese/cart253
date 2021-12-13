@@ -23,8 +23,12 @@ let brickImage = undefined;
 let wrenchImage = undefined;
 let dodgeballImage = undefined;
 
-// The user tring to cross the path
+// Declaring all images that will be used: Level 2
 let userL2;
+let userL2Image = undefined;
+let greenCobraL2Image = undefined;
+let purpleCobraL2Image = undefined;
+let cobraL2Image = undefined;
 
 // array to display all snakes : Level 2
 let snakesL2 = [];
@@ -34,6 +38,15 @@ let addSnakeL2Interval = 1 * 60; // one per second
 // The timer that will count down to 0 so we'll know
 // when to add a new snake
 let timer = addSnakeL2Interval;
+
+// Array of trophies : Level 3
+let trophies = [];
+let numTrophies = 15;
+
+// A timer to count the number of frames in the 3rd level
+let gameOverTimer = 0;
+// A variable to store how long the 3rd level is (in frames)
+let gameLength = 60 * 15; // 15 seconds
 
 /**
 Loading all images that will be used in code
@@ -236,13 +249,13 @@ function level2() {
     // randomly create one of three snakes
     // always create snake at x; 0 so they start on side of screen
     if (r < 0.33) {
-      vehicle = new GreenCobraL2(0, y,image);
+      snakeL2 = new GreenCobraL2(0, y,greenCobraL2Image);
     }
     else if (r < 0.66) {
-      vehicle = new PurpleCobraL2(0, y,image);
+      snakeL2 = new PurpleCobraL2(0, y,purpleCobraL2Image);
     }
     else {
-      vehicle = new CobraL2(0, y,image);
+      snakeL2 = new CobraL2(0, y,cobraL2Image);
     }
 
     // Generate another random number to control which direction snake will move in
