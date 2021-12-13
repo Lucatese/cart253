@@ -26,7 +26,7 @@ let dodgeballImage = undefined;
 // The user tring to cross the path
 let userL2;
 
-// The snakes(starts at zero)
+// array to display all snakes : Level 2
 let snakesL2 = [];
 
 // How often to add a new snake (in frames)
@@ -45,6 +45,12 @@ function preload() {
     wrenchImage = loadImage("assets/images/wrench.png");
     userImage = loadImage("assets/images/dodgeb.png");
     bground = loadImage("assets/images/gym.png");
+
+  // Loading images to be used in code : Level 2
+    purpleCobraL2Image = loadImage("assets/images/purplesnake.png");
+    cobraL2Image = loadImage("assets/images/cobra.png");
+    greenCobraL2Image = loadImage("assets/images/greensnake.png");
+    userL2Image = loadImage("assets/images/dodgeb.png");
 }
 
 
@@ -197,8 +203,7 @@ function level2() {
       // they collided with each other
       for (let j = 0; j < snakeL2s.length; j++) {
         let otherSnakeL2= snakeL2s[j];
-        // Only check for a crash if the other vehicle
-        // is a DIFFERENT vehicle from the current one
+      // Only check for collision if 2 different snakes collide with each other
         if (snakeL2 !== otherSnakeL2) {
           snakeL2.checkCrash(otherSnakeL2);
         }
@@ -231,13 +236,13 @@ function level2() {
     // randomly create one of three snakes
     // always create snake at x; 0 so they start on side of screen
     if (r < 0.33) {
-      vehicle = new GreenCobraL2(0, y);
+      vehicle = new GreenCobraL2(0, y,image);
     }
     else if (r < 0.66) {
-      vehicle = new PurpleCobraL2(0, y);
+      vehicle = new PurpleCobraL2(0, y,image);
     }
     else {
-      vehicle = new CobraL2(0, y);
+      vehicle = new CobraL2(0, y,image);
     }
 
     // Generate another random number to control which direction snake will move in
