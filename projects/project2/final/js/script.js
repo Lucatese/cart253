@@ -7,7 +7,7 @@ Prototype for Project 2; Final CART 253 Project
 
 "use strict";
 
-let state = `level1`; // Could be level1, level1Fail,level2,level2Title,level2fail,level3,level3fail,final
+let state = `level1`; // Could be level1, level1Fail,level2,level2Title,level2fail,level3Title,level3,level3Success
 
 // Array to display all 3 dodgeable items: Level 1
 let dodgeableItems = [];
@@ -39,14 +39,19 @@ let addSnakeL2Interval = 1 * 60; // one per second
 // when to add a new snake
 let timer = addSnakeL2Interval;
 
-// Array of trophies : Level 3
-let trophies = [];
-let numTrophies = 15;
+// Array of awards : Level 3
+let awards = [];
+let numAwards = 15;
 
 // A timer to count the number of frames in the 3rd level
 let gameOverTimer = 0;
 // A variable to store how long the 3rd level is (in frames)
 let gameLength = 60 * 15; // 15 seconds
+
+// A timer to count the number of frames up to adding an award
+let newAwardTimer = 0;
+// A variable to store how long to wait before adding an award (in frames)
+let newAwardDelay = 60 * 3; // 2 seconds
 
 /**
 Loading all images that will be used in code
@@ -64,6 +69,9 @@ function preload() {
     cobraL2Image = loadImage("assets/images/cobra.png");
     greenCobraL2Image = loadImage("assets/images/greensnake.png");
     userL2Image = loadImage("assets/images/dodgeb.png");
+
+  // Loading images to be used in code : Level 3
+    awardL3 = loadImage("assets/images/award.png");
 }
 
 
@@ -75,8 +83,10 @@ function setup() {
 
   /* Setup for Level 1 */
 setupLevel1();
-
+  /* Setup for Level 2 */
 setupLevel2();
+  /* Setup for Level 3 */
+setupLevel3();
 
 function setupLevel1() {
   // Displaying user image
@@ -112,9 +122,25 @@ function setupLevel1() {
 function setupLevel2() {
   let x = width / 2;
     let y = height;
-    userL2 = new UserL2(x, y,image);
+    userL2 = new UserL2(x, y,userL2Image);
+  }
+
+  function setupLevel3() {
+    for (let l = 0; l < numAwards; i++) {
+   let award = createAward();
+   awards.push(award);
+ }
+ // creates the awards
+function createAward() {
+  let award = {
+    x: random(0, width),
+    y: random(0, height),
+    size: random(75, 100)
+  };
+  return award;
   }
 }
+
 /**
 Displays background image and creates the simulation, failure and success states
 */
@@ -135,12 +161,19 @@ function draw() {
    else if (state === `level2Fail`) {
     level2Fail();
   }
-   else if (state === `level3`) {
+   else if (state === `level3Title`) {
+    level3Title();
+  }
+  else if (state === `level3`) {
     level3();
   }
   else if (state === `level3Fail`) {
     level3Fail();
   }
+  else if (state === `level3Success`) {
+    level3Success();
+  }
+
 
 
 /* Level 1 state : LEVEL 1 */
@@ -203,8 +236,8 @@ function level2() {
     userL2.display();
 
     // Go through all the snakes currently in the simulation
-    for (let i = 0; i < snakesL2.length; i++) {
-      let snakeL2 = snakeL2s[i];
+    for (let k = 0; k < snakesL2.length; k++) {
+      let snakeL2 = snakeL2s[k];
       snakeL2.move();
       snakeL2.wrap();
       snakeL2.display();
@@ -231,7 +264,7 @@ function level2() {
 
     // if userL2 made it to top of canvas progress to next level
     if (userL2.y < 0) {
-      state = `level3`;
+      state = `level3Title`;
     }
 
     //taken from traffic with vehicle collisions exercise
@@ -297,8 +330,23 @@ function keyPressed() {
     pedestrian.x = width / 2;
     state = `level2Title`;
   }
-}
-
-}
-
+  // title() displays the title
+function level3Title() {
+  push();
+  displayText(`Time to collect your trophy! `)
+  textAlign(CENTER, CENTER);
+  textSize(40);
+  fill(0);
+  text(string, width / 2, height / 2);
+  pop();
+  }
+  // game() displays all the circles in the array
+function level3() {
+  // Increase the timer's count by one frame
+  gameOverTimer++;
+  // Check if we have reached the end of our timer
+  if (gameOverTimer >= gameLength) {
+    // The game is over! So we should check the win/lose state
+    gameOver();
+  }
 }
