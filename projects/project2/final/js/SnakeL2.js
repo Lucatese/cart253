@@ -52,7 +52,7 @@ checkCrash(other) {
 }
 
 /**
-Zeroes velocity
+freezes both snakes
 */
 stop() {
   this.vx = 0;

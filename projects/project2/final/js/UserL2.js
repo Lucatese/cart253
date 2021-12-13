@@ -1,5 +1,5 @@
   class UserL2 {
-    constructor(x, y,image) {
+    constructor(x, y,image) { 
       this.x = x;
       this.y = y;
       this.size = 20;

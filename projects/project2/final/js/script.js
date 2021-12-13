@@ -29,6 +29,12 @@ let userL2;
 // The snakes(starts at zero)
 let snakesL2 = [];
 
+// How often to add a new snake (in frames)
+let addSnakeL2Interval = 1 * 60; // one per second
+// The timer that will count down to 0 so we'll know
+// when to add a new snake
+let timer = addSnakeL2Interval;
+
 /**
 Loading all images that will be used in code
 */
@@ -82,8 +88,14 @@ function setupLevel1() {
    let dodgeableItem = dodgeableItems[i];
    dodgeableItem.vx = dodgeableItem.speed;
   }
-}
 
+
+function setupLevel2() {
+  let x = width / 2;
+    let y = height;
+    userL2 = new UserL2(x, y,image);
+  }
+}
 /**
 Displays background image and creates the simulation, failure and success states
 */
@@ -94,21 +106,22 @@ function draw() {
     level1();
   } else if (state === `level1Fail`) {
     level1Fail();
-  } else if (state === `level2Title`) {
+  }
+  else if (state === `level2Title`) {
     level2Title();
   }
   else if (state === `level2`) {
    level2();
- }
+  }
    else if (state === `level2Fail`) {
     level2Fail();
-}
-else if (state === `level3`) {
- level3();
-}
-else if (state === `level3Fail`) {
- level3Fail();
-}
+  }
+   else if (state === `level3`) {
+    level3();
+  }
+  else if (state === `level3Fail`) {
+    level3Fail();
+  }
 
 
 /* Level 1 state : LEVEL 1 */
@@ -144,6 +157,16 @@ function level1() {
 function level1Fail() {
   push();
   displayText(`YOU FAILED! NOW GET BACK AND TRY AGAIN!`)
+  textAlign(CENTER, CENTER);
+  textSize(40);
+  fill(0);
+  text(string, width / 2, height / 2);
+  pop();
+}
+
+function level2Title() {
+  push();
+  displayText(`Climb the ssslippery ssslopes to victory! `)
   textAlign(CENTER, CENTER);
   textSize(40);
   fill(0);
@@ -192,6 +215,8 @@ function level2() {
     if (userL2.y < 0) {
       state = `level3`;
     }
+
+    //taken from traffic with vehicle collisions exercise
 
     // Update timer by counting down one frame
     timer -= 1;

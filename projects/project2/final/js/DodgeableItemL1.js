@@ -45,7 +45,7 @@ class DodgeableItemL1 {
   // If the number of dodgeableItems dodged exceeds 50, the `success` state is triggered
   numDodges() {
     if (this.dodges > 50) {
-      state = `level2`;
+      state = `level2Title`;
     }
   }
 
