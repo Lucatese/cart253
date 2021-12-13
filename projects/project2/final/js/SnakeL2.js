@@ -36,4 +36,26 @@ class SnakeL2 {
   display() {
 
   }
+
+  /**
+Check if two snakes crashed into each other. If so
+freeze both snakes.
+*/
+checkCrash(other) {
+  if (this.x + this.width / 2 > other.x - other.width / 2 &&
+    this.x - this.width / 2 < other.x + other.width / 2 &&
+    this.y + this.height / 2 > other.y - other.height / 2 &&
+    this.y - this.height / 2 < other.y + other.height / 2) {
+    this.stop();
+    other.stop();
+  }
+}
+
+/**
+Zeroes velocity
+*/
+stop() {
+  this.vx = 0;
+  this.vy = 0;
+  }
 }

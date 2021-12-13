@@ -7,7 +7,7 @@ Prototype for Project 2; Final CART 253 Project
 
 "use strict";
 
-let state = `level1`; // Could be level1, level1Fail,level2,level2fail,level3,level3fail,final
+let state = `level1`; // Could be level1, level1Fail,level2,level2Title,level2fail,level3,level3fail,final
 
 // Array to display all 3 dodgeable items: Level 1
 let dodgeableItems = [];
@@ -22,6 +22,12 @@ let userImage = undefined;
 let brickImage = undefined;
 let wrenchImage = undefined;
 let dodgeballImage = undefined;
+
+// The user tring to cross the path
+let userL2;
+
+// The snakes(starts at zero)
+let snakesL2 = [];
 
 /**
 Loading all images that will be used in code
@@ -45,7 +51,7 @@ function setup() {
   /* Setup for Level 1 */
 setupLevel1();
 
-
+setupLevel2();
 
 function setupLevel1() {
   // Displaying user image
@@ -87,10 +93,21 @@ function draw() {
   if (state === `level1`) {
     level1();
   } else if (state === `level1Fail`) {
-    level1fail();
-  } else if (state === `level2`) {
-    level2();
+    level1Fail();
+  } else if (state === `level2Title`) {
+    level2Title();
   }
+  else if (state === `level2`) {
+   level2();
+ }
+   else if (state === `level2Fail`) {
+    level2Fail();
+}
+else if (state === `level3`) {
+ level3();
+}
+else if (state === `level3Fail`) {
+ level3Fail();
 }
 
 
@@ -136,7 +153,109 @@ function level1Fail() {
 
 function level2() {
 
-  
+    //using arrow keys to move userL2
+    userL2.handleInput();
+    // adds movement to userL2
+    userL2.move();
+    // displays the userL2
+    userL2.display();
+
+    // Go through all the snakes currently in the simulation
+    for (let i = 0; i < snakesL2.length; i++) {
+      let snakeL2 = snakeL2s[i];
+      snakeL2.move();
+      snakeL2.wrap();
+      snakeL2.display();
+
+      // Check whether it hit the UserL2
+      userL2.checkHit(snakesL2);
+
+      // Go through all the snakes  to check whether
+      // they collided with each other
+      for (let j = 0; j < snakeL2s.length; j++) {
+        let otherSnakeL2= snakeL2s[j];
+        // Only check for a crash if the other vehicle
+        // is a DIFFERENT vehicle from the current one
+        if (snakeL2 !== otherSnakeL2) {
+          snakeL2.checkCrash(otherSnakeL2);
+        }
+      }
+    }
+
+    // If the userL2 got hit by a snake change state
+
+    if (!userL2.alive) {
+      state = `level2Fail`;
+    }
+
+    // if userL2 made it to top of canvas progress to next level
+    if (userL2.y < 0) {
+      state = `level3`;
+    }
+
+    // Update timer by counting down one frame
+    timer -= 1;
+    // Check if timer hits zero
+    if (timer <= 0) {
+      // Choose a random y position
+      let y = random(0, height);
+      // Generate a random number for probability
+      let r = random(0, 1);
+    // randomly create a snake
+    let snakeL2 = undefined;
+    // randomly create one of three snakes
+    // always create snake at x; 0 so they start on side of screen
+    if (r < 0.33) {
+      vehicle = new GreenCobraL2(0, y);
+    }
+    else if (r < 0.66) {
+      vehicle = new PurpleCobraL2(0, y);
+    }
+    else {
+      vehicle = new CobraL2(0, y);
+    }
+
+    // Generate another random number to control which direction snake will move in
+    r = random(0, 1);
+    if (r < 0.75) {
+      snakeL2.vx = -snakeL2.speed * random(0.8, 1.3);
+    } else {
+      snakeL2.vx = snakeL2.speed * random(0.8, 1.3);
+    }
+    // Add our new snake to the second level
+    snakeL2s.push(snake);
+
+    // Reset timer
+    timer = addSnakeL2Interval;
+  }
+}
+function level2Fail() {
+  push();
+  displayText(`You Sssssuck, Try harder next time!`)
+  textAlign(CENTER, CENTER);
+  textSize(40);
+  fill(0);
+  text(string, width / 2, height / 2);
+  pop();
+}
+
+
+/**
+If the key is pressed the switch states
+*/
+function keyPressed() {
+  if (state === `level2Title`) {
+    // If we're in the title go to the level
+    state = `level2`;
+  } else if (state === `level2Fail` || state === `level3`) {
+    // If we hit an ending go to either the fail screen or next level
+    vehicles = [];
+    pedestrian.y = height;
+    pedestrian.x = width / 2;
+    state = `level2Title`;
+  }
+}
+
 }
 
 }
