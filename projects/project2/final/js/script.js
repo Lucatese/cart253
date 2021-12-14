@@ -194,16 +194,16 @@ function level1() {
     // Display dodgeableItems
     dodgeableItem.display();
     // dodgeableItems will shake up and down slightly in order to make the overall movement more realistic
-    dodgeableItem.wiggle();
+    dodgeableItems.wiggle();
     // If the number of dodgeableItems dodged exceeds 50, `level2` state is triggered
     dodgeableItem.numDodges();
     // When a dodgeableItem passes the user, +1 is added to the dodges
     dodgeableItem.checkScreen();
     // Check when dodgeableItem and user overlap
-    user.checkCollision(dodgeableItem);
+    user.checkCollision(dodgeableItemL1);
   }
   // User control for UserL1 image
-  user.handleInput();
+  userL1.handleInput();
 }
 // State that appears when user gets hit by a dodgeableItem: level1Fail
 function level1Fail() {
@@ -354,15 +354,15 @@ newAwardTimer++;
 // Check if we have reached the end of our timer
 if (newAwardTimer >= newAwardDelay) {
   // If we have,  add an award
-  let award = createAward();
-  awards.push(award);
+  let awardL3 = createAwardL3();
+  awardL3s.push(awardL3);
   // reset the timer
   newAwardTimer = 0;
 }
   // Display all the awards
-  for (let l = 0; l < awards.length; l++) {
-    let award = awards[l];
-    displayAward(award);
+  for (let l = 0; l < awardL3s.length; l++) {
+    let awardL3 = awardL3s[l];
+    displayAwardL3(awardL3);
   }
 }
 
