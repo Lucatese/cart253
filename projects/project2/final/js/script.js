@@ -71,7 +71,7 @@ function preload() {
     userL2Image = loadImage("assets/images/dodgeb.png");
 
   // Loading images to be used in code : Level 3
-    awardL3 = loadImage("assets/images/award.png");
+    awardL3Image = loadImage("assets/images/award.png");
 }
 
 
@@ -323,14 +323,14 @@ function keyPressed() {
   if (state === `level2Title`) {
     // If we're in the title go to the level
     state = `level2`;
-  } else if (state === `level2Fail` || state === `level3`) {
+  } else if (state === `level2Fail` || state === `level3Title`) {
     // If we hit an ending go to either the fail screen or next level
-    vehicles = [];
-    pedestrian.y = height;
-    pedestrian.x = width / 2;
-    state = `level2Title`;
+    snakes = [];
+    userL2.y = height;
+    userL2.x = width / 2;
+    state = `level3Title`;
   }
-  // title() displays the title
+  //  displays the title
 function level3Title() {
   push();
   displayText(`Time to collect your trophy! `)
@@ -340,13 +340,90 @@ function level3Title() {
   text(string, width / 2, height / 2);
   pop();
   }
-  // game() displays all the circles in the array
+  // display all the awards in the array
 function level3() {
   // Increase the timer's count by one frame
   gameOverTimer++;
   // Check if we have reached the end of our timer
   if (gameOverTimer >= gameLength) {
-    // The game is over! So we should check the win/lose state
+    // The game is over! So we should check the success/fail state
     gameOver();
+  }
+  // Increase the new award timer by one frame
+newAwardTimer++;
+// Check if we have reached the end of our timer
+if (newAwardTimer >= newAwardDelay) {
+  // If we have,  add an award
+  let award = createAward();
+  awards.push(award);
+  // reset the timer
+  newAwardTimer = 0;
+}
+  // Display all the awards
+  for (let l = 0; l < awards.length; l++) {
+    let award = awards[l];
+    displayAward(award);
+  }
+}
+
+// check whether user failed or succeeded and change state
+function gameOver() {
+  // Check if there are 0 awards left...
+  if (awards.length === 0) {
+    // As there are no awards left, the user succeeded
+    state = `level3Success`;
+  }
+  else {
+    // if not then the user failed
+    state = `level3Fail`;
+  }
+}
+// switches from title to game or checks all circles to see if they were clicked
+function mousePressed() {
+  if (state === `level3Titletitle`) {
+    state = `level3`;
+  }
+  else if (state === `level3`) {
+    checkAwardClick();
+  }
+}
+
+//  checks if any award was clicked and removes it
+function checkAwardClick() {
+  // Check all awards
+  for (let l = 0; l < awards.length; l++) {
+    let award = awards[l];
+    // Check the distance to the award from the mouse
+    let d = dist(mouseX, mouseY, award.x, award.y);
+    // Check to see if the mouse was clicked inside the award
+    if (d < award.size / 2) {
+      // Remove the circle from the array with splice()
+      awards.splice(l, 1);
+      // Break out of the for-loop after removing the award
+      break;
+    }
+  }
+}
+
+// level3Success state
+function level3Success() {
+  push();
+  displayText(`Congrats, you're now a dodgeball pro! `)
+  textAlign(CENTER, CENTER);
+  textSize(40);
+  fill(0);
+  text(string, width / 2, height / 2);
+  pop();
+  }
+
+// level3Fail state
+function level3Fail() {
+  push();
+  displayText(`You had trouble picking up a trophy? `)
+  textAlign(CENTER, CENTER);
+  textSize(40);
+  fill(0);
+  text(string, width / 2, height / 2);
+  pop();
   }
 }
